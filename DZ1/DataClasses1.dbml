@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SageBookDB" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Projects\ADONET_FORME\DZ2\SageBookDB.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="DZ1.Properties.Settings" SettingsPropertyName="SageBookDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.SageBook" Member="SageBook">
+    <Type Name="SageBook">
+      <Column Name="idSage" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idBook" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Sage_SageBook" Member="Sage" ThisKey="idSage" OtherKey="Id" Type="Sage" IsForeignKey="true" />
+      <Association Name="Book_SageBook" Member="Book" ThisKey="idBook" OtherKey="Id" Type="Book" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sage" Member="Sage">
+    <Type Name="Sage">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Age" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Sage_SageBook" Member="SageBook" ThisKey="Id" OtherKey="idSage" Type="SageBook" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Book" Member="Book">
+    <Type Name="Book">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Book_SageBook" Member="SageBook" ThisKey="Id" OtherKey="idBook" Type="SageBook" />
+    </Type>
+  </Table>
+</Database>
